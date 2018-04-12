@@ -1,0 +1,90 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<iterator>
+using namespace std;
+
+vector<long int> bin_number;
+vector<long int>::iterator i;
+void dec_bin(int num) {
+	int rem, i = 1, digit;
+
+	while (num != 0)
+	{
+		rem = num % 2;
+		num /= 2;
+		bin_number.push_back(rem);
+	}
+}
+
+void make_sets(vector<long int>sets) {
+	int size = sets.size();
+	while (size % 7 != 0) {
+		bin_number.push_back(0);
+		size++;
+	}
+	reverse(bin_number.begin(), bin_number.end());
+	for (i = bin_number.begin();i != bin_number.end();i++) {
+		//		cout << *i;
+	}
+}
+
+void append(vector<long int> vec) {
+	int size = vec.size();
+	for (int i = 0;i < size;i++) {
+		while (size % 7 != 0)
+			vec.push_back(0);
+	}
+
+
+
+
+
+
+}
+
+void main() {
+	int num;
+	int length = bin_number.size();
+	cout << "Enter integer value\n";
+	cin >> num;
+	dec_bin(num);
+	make_sets(bin_number);
+	int size;
+	int count = 0;
+	size = bin_number.size();
+	if (size > 7) {
+		cout << "0    ";
+	}
+	else {
+		cout << "1    ";
+	}
+	for (i = bin_number.begin();i != bin_number.end();i++) {
+
+		count++;
+		cout << *i ;
+		if (count % 7 == 0)
+		{
+			if (count == size) {}
+			else {
+
+				if (count + 7 == size)
+				{
+					cout << "\n" << "1    ";
+				}
+				else {
+					cout << "\n" << "0    ";
+				}
+
+
+			}
+
+		}
+
+
+	}
+
+	//append(bin_number);
+	cout << endl;
+	system("pause");
+}

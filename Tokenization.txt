@@ -1,0 +1,80 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <conio.h>
+
+
+using std::cout;
+using std::endl;
+
+#include <fstream>
+using std::ifstream;
+using std::ofstream;
+#include <cstring>
+
+
+const int MAX_CHARS_PER_LINE = 512;
+const int MAX_TOKENS_PER_LINE = 20;
+char DELIMITER[] = " \t\w";
+
+
+int main()
+{
+
+	ifstream fin;
+	ofstream fout;
+	char DELIMITER[] = " \,\.\"";
+
+	fin.open("C:/Users/melab1/Desktop/micromp3.txt"); // open a file
+	fout.open("C:/Users/melab1/Desktop/micromp31.txt");
+	if (!fin.good()) {
+		cout << "404 file not found";
+		return 1; // exit if file not found
+	}
+	// read each line of the file
+	cout << "something is in progress3";
+	while (!fin.eof())
+	{
+		// read an entire line into memory
+		char buf[MAX_CHARS_PER_LINE];
+		fin.getline(buf, MAX_CHARS_PER_LINE);
+
+		// parse the line into blank-delimited tokens
+		int n = 0; 
+
+				   // array to store memory addresses of the tokens in buf
+		const char* token[MAX_TOKENS_PER_LINE] = {};
+
+													 
+		token[0] = strtok(buf, DELIMITER); 
+		if (token[0]) 
+		{
+			for (n = 1; n < MAX_TOKENS_PER_LINE; n++)
+			{
+				token[n] = strtok(0, DELIMITER); 
+
+
+
+
+				if (!token[n]) break;
+			}
+		}
+
+		// process (print) the tokens
+		for (int i = 0; i < n; i++) 
+		{
+			cout << token[i] << endl;
+
+			fout << token[i] << endl;
+			cout << endl;
+		}
+	}
+	fout.close();
+
+
+
+
+	_getch();
+	return 0;
+}

@@ -1,0 +1,61 @@
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+using std::cout;
+using std::endl;
+using std::string;
+#include <fstream>
+using std::ifstream;
+using std::ofstream;
+#include <cstring>
+
+
+
+int main()
+{
+
+	ifstream fin_tk1,fin_tk2;
+	ofstream fout;
+
+	fin_tk1.open("C:/Users/melab1/Desktop/ipod1.txt");
+	fin_tk2.open("C:/Users/melab1/Desktop/stoplist.txt"); // open a file
+	fout.open("C:/Users/melab1/Desktop/removedStopwords.txt");
+
+
+
+
+
+
+	while (!fin_tk1.eof())
+	{
+
+		string temp1, temp2;
+		bool result = true;
+
+		fin_tk1 >> temp1;
+
+		while (!fin_tk2.eof())
+		{
+			fin_tk2 >> temp2;
+
+
+
+			if (temp1 == temp2)
+			{
+				result = false;
+			}
+
+
+
+		} 
+		if (result == true) 
+		{
+			fout << temp1 << endl;
+		}
+		fin_tk2.clear();
+		fin_tk2.seekg(0, std::ios::beg);
+	}
+	cout << "\nStopword removal completed";
+	
+	return 0;
+}

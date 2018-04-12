@@ -1,0 +1,41 @@
+#include<iostream>
+#include<fstream>
+#include<string>
+#include<vector>
+#include<iterator>
+#include<algorithm>
+#include <conio.h>
+using namespace std;
+
+vector<string> terms, unique_terms;
+vector<string>::iterator i, j;
+
+int main() {
+
+	ifstream file("C://Users/melab1/Desktop/f2.txt");
+	string word, putword;/*declared string->word to store terms          declared string->putword to store one word */
+	int cnt = 0;//count occurence of each term
+	while (getline(file, word)) {  //get one string at a time from file and push in vector
+		if (!word.empty())
+			terms.push_back(word);
+	}
+	for (i = terms.begin();i != terms.end();++i) {      //copy contents of terms to unique_terms vector
+		unique_terms.push_back(*i);
+	}
+	i = unique(unique_terms.begin(), unique_terms.end());  //get all unique terms from unique_terms i.e. only one occurence of each term
+														   //eg. cat apperaing 5 times will be considered only once
+	unique_terms.resize(distance(unique_terms.begin(), i));  //resize the unique_terms vector using resize
+															 //all extra terms will be removed except one copy of that term so vector will have to be resized
+
+	for (i = terms.begin(), j = unique_terms.begin();i != terms.end(), j != unique_terms.end();++i, ++j)  //iterate through terms and unique_terms at the same time
+	{
+		putword = *j;												//store the first unique term in string putword
+		cnt = count(terms.begin(), terms.end(), putword);			// use count function to count all appearances of the string putword
+		cout << putword << ":" << cnt << endl;							//print count
+	}//loop runs for all such unique terms in the vector<terms>
+	_getch();
+	return 0;
+}
+
+
+
